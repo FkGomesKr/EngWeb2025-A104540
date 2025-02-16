@@ -25,7 +25,7 @@ Este trabalho consistiu em criar um serviço em **`node.js`**, que faz recurso �
 ## Resultados
 O serviço resultante, que se ao programa **`server.js`**, cumpriu as expectativas de navegabilidade, organização/gestão e eficiência do website esperado.
 Com vista ao consumo da API foi utilizado o *Node module* **`axios`**.
-Para além disso, de forma a utilizar uma base de dados em **`json`** que funcionasse de forma eficiente e facilmente manipulável com o **`json-server`**, foi gerado um novo ficheiro **`json`** para servir de base de dados da nossa *Oficina*. Para este efeito foi criado *um script* em python capaz de manipular os dados do ""`dataset_reparacoes.json`"" e gerar o ""`serverDB.json`**.
+Para além disso, de forma a utilizar uma base de dados em **`json`** que funcionasse de forma eficiente e facilmente manipulável com o **`json-server`**, foi gerado um novo ficheiro **`json`** para servir de base de dados da nossa *Oficina*. Para este efeito foi criado *um script* em python capaz de manipular os dados do **`dataset_reparacoes.json`** e gerar o **`serverDB.json`**.
 
 
 
