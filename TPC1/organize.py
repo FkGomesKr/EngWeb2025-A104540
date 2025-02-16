@@ -4,7 +4,7 @@ with open('dataset_reparacoes.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
 
 organized_json = {
-    "reparacoes": [],
+    "reparacoes": data['reparacoes'],
     "carros": {},
     "intervencoes": {}
 }
@@ -18,28 +18,28 @@ def add_intervention(intervention):
         }
 
 for repair in data['reparacoes']:
-    organized_json["reparacoes"].append({
-        "data": repair['data'],
-        "nif": repair['nif'],
-        "nome": repair['nome'],
-        "marca": repair['viatura']['marca'],
-        "modelo": repair['viatura']['modelo'],
-        "nr_intervencoes": repair['nr_intervencoes']
-    })
-    
-    marca_modelo = f"{repair['viatura']['marca']} {repair['viatura']['modelo']}"
-    if marca_modelo not in organized_json["carros"]:
-        organized_json["carros"][marca_modelo] = 1
+    marca = repair['viatura']['marca']
+    modelo = repair['viatura']['modelo']
+
+    if (marca, modelo) not in organized_json["carros"]:
+        organized_json["carros"][(marca, modelo)] = 1
     else:
-        organized_json["carros"][marca_modelo] += 1
+        organized_json["carros"][(marca, modelo)] += 1
     
     for intervention in repair['intervencoes']:
         add_intervention(intervention)
 
-organized_json["carros"] = [{"marca_modelo": k, "nr_carros": v} for k, v in organized_json["carros"].items()]
-organized_json["intervencoes"] = [{"codigo": k, **v} for k, v in organized_json["intervencoes"].items()]
+organized_json["carros"] = [
+    {"marca": marca, "modelo": modelo, "nr_carros": count}
+    for (marca, modelo), count in organized_json["carros"].items()
+]
 
-organized_json["carros"].sort(key=lambda x: x['marca_modelo'])
+organized_json["intervencoes"] = [
+    {"codigo": k, **v} for k, v in organized_json["intervencoes"].items()
+]
+
+organized_json["carros"].sort(key=lambda x: (x['marca'], x['modelo']))
+
 organized_json["intervencoes"].sort(key=lambda x: x['codigo'])
 
 # Write the new JSON structure to serverDB.json
