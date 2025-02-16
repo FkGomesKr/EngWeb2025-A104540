@@ -18,12 +18,12 @@ Este trabalho consistiu em criar um serviço em **`node.js`**, que faz recurso �
 4. Listagem das marcas e modelos dos carros intervencionados: lista alfabética das marcas e modelos dos carros reparados - marca, modelo, número de carros;
 5. Página da Reparação: página com toda a informação de uma reparação;
 6. Página do tipo de intervenção: dados da intervenção (código, nome e descrição) e lista de reparações onde foi realizada;
-7. Página do marca/modelo: dados do tipo de carro reparado e lista de reparações em carros desse tipo.
+7. Página da marca/modelo: dados do tipo de carro reparado e lista de reparações em carros desse tipo.
 
 ---
 
 ## Resultados
-O serviço resultante resume-se ao programa **`server.js`** cumpriu as expectativas de navegabilidade, organização/gestão e eficiência do website esperado.
+O serviço resultante, que se ao programa **`server.js`**, cumpriu as expectativas de navegabilidade, organização/gestão e eficiência do website esperado.
 Com vista ao consumo da API foi utilizado o *Node module* **`axios`**.
 Para além disso, de forma a utilizar uma base de dados em **`json`** que funcionasse de forma eficiente e facilmente manipulável com o **`json-server`**, foi gerado um novo ficheiro **`json`** para servir de base de dados da nossa *Oficina*. Para este efeito foi criado *um script* em python capaz de manipular os dados do ""`dataset_reparacoes.json`"" e gerar o ""`serverDB.json`**.
 
@@ -31,7 +31,7 @@ Para além disso, de forma a utilizar uma base de dados em **`json`** que funcio
 
 ### Como Executar o Código
 1. Certifica-te de que tens `> nodejs v22.0.0`.
-2. Certifica-te de que instalas todas as dependências necessárias relatives aos *Node modules*. Podes fazê-lo através do `npm` ou até do `yarn`.
+2. Certifica-te de que instalas todas as dependências necessárias relativas aos *Node modules*. Podes fazê-lo através do `npm` ou até do `yarn`.
 3. Inicializa o `json-server` com o dataset correto:
 ```bash
 json-server --watch .\serverDB.json
@@ -40,4 +40,4 @@ json-server --watch .\serverDB.json
 ```bash
 node .\server.js
 ```
-5. Verifica a porta usado no `server.js` e acede ao website da oficina, `"http://localhost:4321"`.
+5. Verifica a porta usada no `server.js` e acede ao website da oficina, `"http://localhost:4321"`.
