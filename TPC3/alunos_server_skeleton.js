@@ -2,7 +2,7 @@ import { createServer } from 'http';
 import axios from 'axios';
 import { parse } from 'querystring';
 
-import templates, { studentFormEditPage, studentFormPage, studentPage } from './templates.js';
+import templates, { errorPage, studentFormDeletePage, studentFormEditPage, studentFormPage, studentPage } from './templates.js';
 import { staticResource, serveStaticResource } from './static.js';            
 import studentsListPage from './templates.js';
 
@@ -38,7 +38,9 @@ var alunosServer = createServer((req, res) => {
             case "GET": 
                 if (req.url === "/") {
                     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-                    res.end(`Initial Page of Alunos Server, ${d}`); 
+                    res.write(`<h1>Initial Page of Students' Server, ${d}</h1>`);
+                    res.write("<a href='/alunos'>CLICK ME: Students List</a>");
+
                 }
                 else if (req.url === "/alunos") {
                     axios.get(API_URL+'/alunos')
@@ -76,6 +78,24 @@ var alunosServer = createServer((req, res) => {
                             res.end(`<p>Erro a carregar a pagina de edição de um aluno específico de id: ${id}.</p>`); 
                         });
                         
+                } else if (req.url.startsWith("/alunos/delete/")) {
+                    const studentId = req.url.split("/")[3];
+                    
+                    if (studentId) {
+                        axios.delete(`${API_URL}/alunos/${studentId}`)
+                            .then(() => {
+                                res.writeHead(302, { Location: "/alunos" });
+                                res.end();
+                            })
+                            .catch(err => {
+                                console.log("Error deleting student:", err);
+                                res.writeHead(500, { 'Content-Type': 'text/html; charset=utf-8' });
+                                res.end("<p>Error deleting student.</p>");
+                            });
+                    } else {
+                        res.writeHead(400, { 'Content-Type': 'text/html; charset=utf-8' });
+                        res.end("<p>Invalid student ID.</p>");
+                    }
                 } else if (req.url.startsWith("/alunos/")) {
                     const id = req.url.split("/")[2];
 
@@ -91,11 +111,10 @@ var alunosServer = createServer((req, res) => {
                             res.writeHead(500, { 'Content-Type': 'text/html; charset=utf-8' });
                             res.end(`<p>Erro a carregar a pagina de um aluno específico de id: ${id}.</p>`); 
                         });
+                } else {
+                    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+                    res.end(errorPage("Page doesn't exist.", d));
                 }
-               
-                // GET /alunos/delete/:id --------------------------------------------------------------------
-                
-                // GET ? -> Lancar um erro
                 break
             case "POST":
                 if (req.url === "/alunos/registo") {
@@ -161,9 +180,6 @@ var alunosServer = createServer((req, res) => {
                         }
                     });
                 }
-
-                // POST ? -> Lancar um erro
-                
             default: 
                 // Outros metodos nao sao suportados
         }
