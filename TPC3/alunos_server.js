@@ -2,7 +2,7 @@ import { createServer } from 'http';
 import axios from 'axios';
 import { parse } from 'querystring';
 
-import templates, { errorPage, studentFormDeletePage, studentFormEditPage, studentFormPage, studentPage } from './templates.js';
+import { errorPage, studentFormEditPage, studentFormPage, studentPage } from './templates.js';
 import { staticResource, serveStaticResource } from './static.js';            
 import studentsListPage from './templates.js';
 
