@@ -1,6 +1,6 @@
 # Resolução do TPC6
 
-### **Data:** x de Março de 2025  
+### **Data:**19 de Março de 2025  
 ### **Autor:**  
 ![Foto do Autor](https://avatars.githubusercontent.com/u/140913282?v=4)  
 - **Nome:** Pedro Miguel Araújo Gomes 
